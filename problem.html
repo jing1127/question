@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/index.css" />
+				<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+		<title>问题反馈</title>
+		<style>
+			#loader8 { 
+			  position: relative;
+			  top:-300px;
+			  left:50%;  
+			  margin-left:-20px;  
+			  border-top: 8px solid rgba(0, 0, 0, 0.2);     
+			  border-right: 8px solid rgba(0, 0, 0, 0.2);     
+			  border-bottom: 8px solid rgba(0, 0, 0, 0.2);     
+			  border-left: 8px solid rgba(0, 0, 0, 0.5);     
+			  -webkit-animation: load8 1.1s infinite linear;     
+			  animation: load8 1.1s infinite linear;     
+			}     
+			#loader8,#loader8:after {     
+			  border-radius: 50%;     
+			  width: 20px;     
+			  height: 20px;     
+			}     
+			@-webkit-keyframes load8 {     
+			  0% {     
+			    -webkit-transform: rotate(0deg);     
+			    transform: rotate(0deg);     
+			  }     
+			  100% {     
+			    -webkit-transform: rotate(360deg);     
+			    transform: rotate(360deg);     
+			  }     
+			}     
+			@keyframes load8 {     
+			  0% {     
+			    -webkit-transform: rotate(0deg);     
+			    transform: rotate(0deg);     
+			  }     
+			  100% {     
+			    -webkit-transform: rotate(360deg);     
+			    transform: rotate(360deg);     
+			  }     
+			}     
+			.locat{margin-top:20px;color: #EE9D1A;}
+			.modal {position: fixed;left: 0;right:0;top: 0;bottom: 0;z-index: 999;font-size: 15px;color: #f2f2f2;text-align: center;display: none;}
+			.modal-dialog {width: 200px;margin: 260px auto;}
+			.modal-content {background: #555;border:none;border-radius: 4px;padding:6px 8px;position: relative;}	
+		</style>
+		    <script>
+     //图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 65; 
+          var MAXHEIGHT = 65;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead onclick=$("#previewImg").click()>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+				//img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+              $("#preview1").show();
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function previewImage1(file)
+        {
+          var MAXWIDTH  = 65; 
+          var MAXHEIGHT = 65;
+          var div = document.getElementById('preview1');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead1 onclick=$("#previewImg1").click()>';
+              var img1 = document.getElementById('imghead1');
+              img1.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img1.offsetWidth, img1.offsetHeight);
+                img1.width  =  rect.width;
+                img1.height =  rect.height;
+				//img.style.marginLeft = rect.left+'px';
+                img1.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img1.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+              $("#preview2").show();
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead1>';
+            var img1 = document.getElementById('imghead1');
+            img1.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img1.offsetWidth, img1.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead1 style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function previewImage2(file)
+        {
+          var MAXWIDTH  = 65; 
+          var MAXHEIGHT = 65;
+          var div = document.getElementById('preview2');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead2 onclick=$("#previewImg2").click()>';
+              var img2 = document.getElementById('imghead2');
+              img2.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img2.offsetWidth, img2.offsetHeight);
+                img2.width  =  rect.width;
+                img2.height =  rect.height;
+				//img.style.marginLeft = rect.left+'px';
+                img2.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img2.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead2>';
+            var img2 = document.getElementById('imghead2');
+            img2.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img2.offsetWidth, img2.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead2 style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight ){
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                
+                if( rateWidth > rateHeight ){
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else{
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+    </script>
+	</head>
+	<body>
+		<form id="form1">
+		<div class="box">
+			<div class"box_container">
+				<header class="con_head">
+					问题描述
+				</header>
+				<section class="con_main">
+					<textarea id="problem" name="problem" placeholder="请写下您遇到的问题..."></textarea>
+				</section>
+				<div class="img-box full">
+					<section class=" img-section">
+						<div class="z_photo upimg-div clear" >
+				               	 <section  id="preview" class="z_file fl">
+				               	 	<img  id="imghead" src="img/all.png" class="add-img" onclick="$('#previewImg').click();">
+				               	 </section>
+				               	 <input name="files"  type="file" onchange="previewImage(this)" style="display: none;" id="previewImg" multiple accept = 'image/gif,image/jpeg,image/jpg,image/png' />
+				               	 <section  id="preview1" class="z_file fl" style="display: none;">
+				               	 	<img  id="imghead1" src="img/all.png" class="add-img" onclick="$('#previewImg1').click();">
+				               	 </section>
+				               	 <input name="files"  type="file" onchange="previewImage1(this)" style="display: none;" id="previewImg1" multiple accept = 'image/gif,image/jpeg,image/jpg,image/png' />
+				               	 <section  id="preview2" class="z_file fl" style="display: none;">
+				               	 	<img  id="imghead2" src="img/all.png" class="add-img" onclick="$('#previewImg2').click();">
+				               	 </section>
+				               	 <input name="files"  type="file" onchange="previewImage2(this)" style="display: none;" id="previewImg2" multiple accept = 'image/gif,image/jpeg,image/jpg,image/png' />
+				               	 <span class="tips">上传照片...</span>
+				         </div>
+					 </section>
+				</div>
+		        <aside class="mask works-mask">
+					<div class="mask-content">
+						<p class="del-p"></p>
+						<p class="locat"><span id="times">3</span>秒后可重新提交</p>
+					</div>
+				</aside>
+				
+			</div>
+		</div>
+		<div class="phone">
+			<span>手机号</span>
+			<input type="text" id="tel" name="tel" placeholder="选填，方便我们与您联系" />
+		</div>
+		<div class="btn">
+			<div class="btn_sub" id="submitId">提交</div>
+		</div>
+		<div id="loader8" style="display: none;"></div>
+		</form>
+		<div class="modal">
+		    <div class="modal-dialog">
+			<div class="modal-content">
+				<div id="buy-form">
+				    <div class="tips1" id="error"></div>
+				</div>
+			</div>
+			 </div>
+		</div>
+		<script>
+
+$("#submitId").bind('click',function(){
+	var telReg=/^1[34578][0-9]{9}$/;
+	if($("#problem").val()==""){
+		$(".modal").css("display","block");
+		$("#error").html("请填写您遇到的问题!");
+		setTimeout(function(){
+			$(".modal").css("display","none");
+		},1200);
+	}else if((!($("#tel").val()=="")) && (!telReg.test($("#tel").val()))){
+			$(".modal").css("display","block");
+			$("#error").html("手机号格式不正确!");
+			setTimeout(function(){
+				$(".modal").css("display","none");
+			},1200);
+	}else{
+		var formdata = new FormData("");
+		formdata.append("problem", $('#problem').val());
+		formdata.append("files", $('#previewImg')[0].files[0]);
+		formdata.append("files", $('#previewImg1')[0].files[0]);
+		formdata.append("files", $('#previewImg2')[0].files[0]);
+		formdata.append("tel",$("#tel").val());
+		$("#loader8").css("display","block");
+		$("#submitId").unbind("click");
+		$("#submitId").css("background","#ffe79b");
+		$.ajax({
+			url: "http://192.168.2.13:8080/client/AppProblemFeedback",
+			type: 'POST',
+			cache: false,
+			data: formdata,
+			//必须false才会避开jQuery对 formdata 的默认处理 
+			// XMLHttpRequest会对 formdata 进行正确的处理
+			processData: false,
+			contentType: false,
+			success: function(data) {
+				$("#loader8").css("display","none");
+				console.log(data);
+				if(data.resultCode=="0000"){
+					$(".mask").show();
+					$(".del-p").html(data.resultMsg);
+					var timeBack=3;
+					function timers(){
+						timeBack=timeBack-1;
+						$("#times").html(timeBack);
+						if(timeBack<1){
+							timeBack=0;
+							clearTimeout(timer);
+							$(".mask").hide();
+							window.location.reload();
+						}else{
+							setTimeout(timers,1000);
+						}
+					}
+					var timer=setTimeout(timers,1000);
+				}else{
+					$(".modal").css("display","block");
+					$("#error").html(data.resultMsg);
+					setTimeout(function(){
+						$(".modal").css("display","none");
+					},1200);
+				}
+				
+			},
+			error: function() {
+				console.log("error");
+			}
+		})
+	}
+	
+})
+		</script>
+	</body>
+</html>
